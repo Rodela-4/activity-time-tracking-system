@@ -6,7 +6,8 @@
 __pycache__/
 *.py[cod]
 
-# Django
+# sqlite
 db.sqlite3
+jamsinhs/sql*
 
-secrets.json
+settings.json
