@@ -6,7 +6,6 @@
 __pycache__/
 *.py[cod]
 
-
 # Django
 db.sqlite3
 
