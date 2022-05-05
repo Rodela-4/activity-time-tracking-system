@@ -1,0 +1,13 @@
+# Logs
+*.out
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+
+
+# Django
+db.sqlite3
+
+secrets.json
