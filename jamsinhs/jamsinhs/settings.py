@@ -30,7 +30,14 @@ SECRET_KEY = settings['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = settings['DEBUG']
 
+
 ALLOWED_HOSTS = settings['ALLOWED_HOSTS']
+
+
+if settings['Production']:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 
 # Application definition
