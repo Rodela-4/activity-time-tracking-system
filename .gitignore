@@ -1,3 +1,4 @@
+
 # Apple
 .DS_Store
 
@@ -9,8 +10,12 @@
 __pycache__/
 *.py[cod]
 
-# Django
-db.sqlite3
+# Static files
 staticfiles/
 
+# Sqlite
+db.sqlite3
+jamsinhs/sql*
+
+# Settings
 settings.json
