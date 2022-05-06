@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ExportActionMixin
 
 # Register your models here.
 from .models import Apply, Activity, User, Additonal_hour, Plan
@@ -9,7 +10,7 @@ class Additonal_hourInline(admin.TabularInline):
 class PlanInline(admin.TabularInline):
     model = Plan
 
-class ApplyAdmin(admin.ModelAdmin):
+class ApplyAdmin(ExportActionMixin, admin.ModelAdmin):
     list_filter = ('activity','student_id',)
     list_display = ('student_id', 'name', 'activity', 'state', 'completed_time',)
     inlines = [Additonal_hourInline]
