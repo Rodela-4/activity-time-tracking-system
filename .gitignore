@@ -1,0 +1,21 @@
+
+# Apple
+.DS_Store
+
+# Logs
+*.out
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Static files
+staticfiles/
+
+# Sqlite
+db.sqlite3
+jamsinhs/sql*
+
+# Settings
+settings.json
