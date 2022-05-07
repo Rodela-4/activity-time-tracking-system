@@ -8,12 +8,12 @@
     {% if user %}
     <a class="navbar-brand js-scroll-trigger" href="/polls/logout/">
         <span class="d-block d-lg-none">Logout</span>
-        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'polls/img/jamsin.jpg' %}" alt="..." title='Login' /></span>
+        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static '/img/jamsin.jpg' %}" alt="..." title='Login' /></span>
     </a>
     {% else %}
     <a class="navbar-brand js-scroll-trigger" href="/polls/login/">
         <span class="d-block d-lg-none">Login</span>
-        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'polls/img/jamsin.jpg' %}" alt="..." title='Login'/></span>
+        <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static '/img/jamsin.jpg' %}" alt="..." title='Login'/></span>
     </a>
     {% endif %}
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -58,8 +58,8 @@
     <hr class="m-0" />
 
     <!-- APPLY-->
-    {% if latest_activity_list %}
     <section class="resume-section" id="apply">
+        {% if latest_activity_list %}
         <div class="resume-section-content">
             <h2 class="mb-5">apply</h2>
             {% for activity in latest_activity_list %}
@@ -75,10 +75,10 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <p>신청 가능한 활동이 없습니다.</p>
+        {% endif %}
     </section>
-    {% else %}
-    <p>신청 가능한 활동이 없습니다.</p>
-    {% endif %}
 
     <hr class="m-0" />
 
