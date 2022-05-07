@@ -97,9 +97,7 @@ def apply(request, activity_id):
     return HttpResponseRedirect(reverse('polls:results', args=(apply.id,)))
 
 def register(request):
-    if request.method == "GET":
-        return render(request, 'user/register.html')
-    elif request.method == "POST":
+    if request.method == "POST":
         studentid = request.POST['studentid']
         name = request.POST['name']
         password = request.POST['password']
