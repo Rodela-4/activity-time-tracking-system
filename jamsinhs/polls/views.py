@@ -141,14 +141,6 @@ def login(request):
         return render(request, 'polls/login.html', response_data)
 
 
-def home(request):
-    user_id = request.session.get('user')
-    if user_id:
-        user_info = User.objects.get(pk=user_id)
-        return HttpResponse(user_info.studentid)
-    return HttpResponse('로그인을 해주십시오.')
-
-
 def logout(request):
     request.session.pop('user')
     return redirect('/polls/')
