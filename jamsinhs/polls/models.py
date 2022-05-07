@@ -9,6 +9,9 @@ class Activity(models.Model):
     end_date = models.DateTimeField(verbose_name='신청 마감')
     description = models.TextField(verbose_name='내용')
     hour = models.IntegerField(verbose_name='부여하는 수과학 활동 시간')
+    
+    class Meta:
+        verbose_name_plural = 'activities'
 
     def __str__(self):
         return self.title
@@ -44,6 +47,9 @@ class Apply(models.Model):
     reg_date = models.DateTimeField('date published')
     state = models.IntegerField(choices=APPLY_STATE, default=1)
 
+    class Meta:
+        verbose_name_plural = 'apply'
+
     def __str__(self):
         return f'{self.student_id}-{self.name}-{self.activity}'
 
@@ -69,9 +75,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.studentid
-
-    class Meta:
-        db_table = 'test_user'
 
     def get_applylist(self):
         return Apply.objects.filter(student_id=int(self.studentid))
