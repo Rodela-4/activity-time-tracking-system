@@ -9,9 +9,10 @@ class Activity(models.Model):
     end_date = models.DateTimeField(verbose_name='신청 마감')
     description = models.TextField(verbose_name='내용')
     hour = models.IntegerField(verbose_name='부여하는 수과학 활동 시간')
-    
+
     class Meta:
-        verbose_name_plural = 'activities'
+        verbose_name = '활동'
+        verbose_name_plural = '활동'
 
     def __str__(self):
         return self.title
@@ -27,6 +28,10 @@ class Plan(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     title = models.CharField(max_length=512, verbose_name='내용')
     due_date = models.DateTimeField(verbose_name='날짜/시간')
+
+    class Meta:
+        verbose_name = '계획'
+        verbose_name_plural = '계획'
 
     def __str__(self):
         return self.title
@@ -46,6 +51,10 @@ class Apply(models.Model):
     name = models.CharField(max_length=512)
     reg_date = models.DateTimeField('date published')
     state = models.IntegerField(choices=APPLY_STATE, default=1)
+
+    class Meta:
+        verbose_name = '승인'
+        verbose_name_plural = '승인'
 
     def __str__(self):
         return f'{self.student_id}-{self.name}-{self.activity}'
@@ -70,6 +79,10 @@ class User(models.Model):
     registered_dttm = models.DateTimeField(
         auto_now_add=True, verbose_name='등록시간')
 
+    class Meta:
+        verbose_name = '학생'
+        verbose_name_plural = '학생'
+
     def __str__(self):
         return self.studentid
 
@@ -90,6 +103,10 @@ class Additonal_hour(models.Model):
     apply = models.ForeignKey(Apply, on_delete=models.CASCADE)
     title = models.CharField(max_length=512, verbose_name='사유')
     extra_hour = models.IntegerField(default=0, verbose_name='추가 시간')
+
+    class Meta:
+        verbose_name = '추가 시간'
+        verbose_name_plural = '추가 시간'
 
     def __str__(self):
         return self.title
