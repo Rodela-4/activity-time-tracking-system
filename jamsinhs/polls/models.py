@@ -10,11 +10,9 @@ class Activity(models.Model):
     description = models.TextField(verbose_name='내용')
     hour = models.IntegerField(verbose_name='부여하는 수과학 활동 시간')
 
-    # ...
     def __str__(self):
         return self.title
 
-    # ...
     def was_published_recently(self):
         return self.start_date >= timezone.now() - datetime.timedelta(days=1)
 
@@ -95,3 +93,4 @@ class Additonal_hour(models.Model):
 
     def __str__(self):
         return self.title
+
