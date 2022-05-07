@@ -1,6 +1,10 @@
 {% extends 'polls/base.html' %}
 {% load static %}
 
+{% block meta %}
+<meta name="description" content="{{ activity.description }}" />
+{% endblock %}
+
 {% block title %}{{ activity.title }}{% endblock %}        
 
 {% block content %}
