@@ -1,12 +1,9 @@
 {% extends 'polls/base.html' %}
 {% load static %}
 
-{% block static %}
-<title>{{ activity.title }}</title>
-{% endblock static %}        
+{% block title %}{{ activity.title }}{% endblock %}        
 
 {% block content %}
-<body style='padding-left:0'>
     <form action="{% url 'polls:apply' activity.id %}" method="post">
         {% csrf_token %}
         <section class='resume-section'>
@@ -29,7 +26,6 @@
                     {% endif %}
                 </div>
             </div>
-        </section>  
+        </section>
     </form>
-</body>
 {% endblock content %}
