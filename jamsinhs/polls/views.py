@@ -15,7 +15,7 @@ from .models import Activity, Apply, User, Plan
 
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'index.html'
     context_object_name = 'latest_activity_list'
 
     def get_queryset(self):
@@ -52,7 +52,7 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Activity
-    template_name = 'polls/detail.html'
+    template_name = 'detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -62,7 +62,7 @@ class DetailView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
     model = Apply
-    template_name = 'polls/results.html'
+    template_name = 'results.html'
 
 
 def apply(request, activity_id):
@@ -116,13 +116,13 @@ def register(request):
                 user.save()
             except IntegrityError:
                 res_data['error2'] = '해당 학번의 사용자가 이미 존재합니다.'
-        return render(request, 'polls/login.html', res_data)
+        return render(request, 'login.html', res_data)
 
 
 def login(request):
     response_data = {}
     if request.method == "GET":
-        return render(request, 'polls/login.html')
+        return render(request, 'login.html')
     elif request.method == "POST":
         login_studentid = request.POST['studentid']
         login_password = request.POST['password']
@@ -138,7 +138,7 @@ def login(request):
                     response_data['error'] = "비밀번호가 틀렸습니다."
             except ObjectDoesNotExist:
                 response_data['error'] = "회원가입 되지 않은 학번입니다"
-        return render(request, 'polls/login.html', response_data)
+        return render(request, 'login.html', response_data)
 
 
 def logout(request):
