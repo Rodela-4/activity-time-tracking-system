@@ -9,6 +9,9 @@ class Activity(models.Model):
     end_date = models.DateTimeField(verbose_name='신청 마감')
     description = models.TextField(verbose_name='내용')
     hour = models.IntegerField(verbose_name='부여하는 수과학 활동 시간')
+    
+    class Meta:
+        verbose_name_plural = 'activities'
 
     class Meta:
         verbose_name = '활동'
