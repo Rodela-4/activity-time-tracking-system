@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-import datetime
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.contrib.auth.hashers import make_password, check_password
-from django.db import IntegrityError, models
+from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Activity, Apply, User, Plan
@@ -78,13 +77,13 @@ def apply(request, activity_id):
 
     applies = activity.apply_set.filter(student_id=user.studentid)
     if len(applies) > 0:
-        return render(request, 'polls/detail.html', {
+        return render(request, 'detail.html', {
             'activity': activity,
             'error_message': f"{user.studentid} 이미 신청하셨습니다",
         })
     current_time = timezone.now()
     if activity.start_date > current_time or activity.end_date < current_time:
-        return render(request, 'polls/detail.html', {
+        return render(request, 'detail.html', {
             'activity': activity,
             'error_message': f"현재 신청기간이 아닙니다. 신청기간은 {activity.start_date}부터 {activity.end_date}입니다.",
         })
