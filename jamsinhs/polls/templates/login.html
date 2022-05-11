@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<meta name="description" content="잠신고 수과학활동 이수시간 웹사이트 로그인 / 회원가입 페이지" />
+{% endblock %}
+
+{% block title %}
+로그인 / 회원가입
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/loginstyle.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+    <div class="form-wrap">
+        <div class="button-wrap">
+            <div id="btn"></div>
+            <button type="button" class="togglebtn" onclick="login()">로그인</button>
+            <button type="button" class="togglebtn" onclick="register()" >회원가입</button>
+        </div>
+
+        <form id="login" method = "POST" action="/polls/login/" class="input-group">
+            {% csrf_token %}
+            <input type="text" class="input-field" name = "studentid" 
+            id="studentid" placeholder="학번" required>
+            <input type="password" class="input-field" name = "password" 
+            id="password" placeholder="비밀번호" required>
+            {% if error %}
+            <input type="text" class="input-field" value="{{ error }}">
+            {% endif %}
+            <input type='submit' class="submit" value="로그인">
+        </form>
+
+        <form id="register" method = "POST" action="/polls/register/" class="input-group">
+            {% csrf_token %}
+            <input type="text" class="input-field" name = "studentid" 
+            id="studentid" placeholder="학번" required>
+            <input type="text" class="input-field" name = "name" 
+            id="name" placeholder="이름" required>
+            <input type="password" class="input-field" name = "password" 
+            id="password" placeholder="비밀번호" required>
+            <input type="password" class="input-field" name = "re_password"
+            id="re_password" placeholder="비밀번호 확인" required>
+            {% if error2 %}
+            <input type="text" class="input-field" value="{{ error2 }}">
+            {% endif %}
+            <input type='submit' class="submit" value="회원가입">
+        </form>
+    </div>
+</div>
+
+<script>
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("btn");
+
+    function login(){
+        x.style.left = "75px";
+        y.style.left = "675px";
+        z.style.left = "0";
+    }
+
+    function register(){
+        x.style.left = "-600px";
+        y.style.left = "75px";
+        z.style.left = "165px";
+    }
+</script>
+{% endblock %}

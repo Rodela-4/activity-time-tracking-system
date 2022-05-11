@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<meta name="description" content="{{ activity.description }}" />
+{% endblock %}
+
+{% block title %}{{ activity.title }}{% endblock %}        
+
+{% block content %}
+<form action="{% url 'polls:apply' activity.id %}" method="post">
+    {% csrf_token %}
+    <section class='resume-section'>
+        <div class="resume-section-content">
+            <h3 class="mb-5">{{ activity.title }}</h3>
+            <div class="mb-5">
+                <div class="flex-grow-1" >
+                    <div style="word-wrap: break-word;white-space: pre-line;word-break:break-all;">
+                        {{ activity.description }}</div>
+                </div>
+                {% if error_message %}
+                <div class="flex-shrink-0"><span class="text-primary">{{ error_message }}</span></div>
+                {% endif %}
+                {% if activity.start_date > now %}
+                <div class="flex-shrink-0"><span class="text-primary">신청기간이 아닙니다.</span></div>
+                {% else %}
+                    <br><br>
+                    <input type="submit" value="신청">
+                    <input type="button" value="처음으로" onclick="location.href='{% url 'polls:index' %}'">
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</form>
+{% endblock content %}

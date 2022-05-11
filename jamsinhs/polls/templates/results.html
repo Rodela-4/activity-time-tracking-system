@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ apply.activity }}{% endblock %}        
+
+{% block content %}
+<section class='resume-section'>
+    <div class="resume-section-content">
+        <h1>{{ apply.activity.title }}</h1>
+        <p>{{ apply.name }} 신청되셨습니다. 신청번호 : {{ apply.id }}</p>
+        <p>감사합니다.</p>
+        <p><a href="{% url 'polls:index' %}">처음으로</a></p>
+    </div>
+</section>
+{% endblock %}
