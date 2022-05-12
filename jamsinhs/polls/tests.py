@@ -184,6 +184,6 @@ class PlanIndexViewTest(TestCase):
                     )
         response = self.client.get(reverse('polls:index'))
         self.assertQuerysetEqual(
-            response.context['latest_plan_list'],
+            response.context['plan_list'],
             [plan],
         )
