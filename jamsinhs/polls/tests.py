@@ -18,12 +18,30 @@ def create_activity(**kwargs):
     return Activity.objects.create(**kwargs)
 
 
-create_activity.defaults = {'title': 'Test activity',
-                            'start_date': days_from_now(0),
-                            'end_date': days_from_now(1),
-                            'description': 'Test activity description',
-                            'hour': 1
-                            }
+create_activity.defaults = {
+    'title': 'Test activity',
+    'start_date': days_from_now(0),
+    'end_date': days_from_now(1),
+    'description': 'Test activity description',
+    'hour': 1
+}
+
+
+def create_plan(**kwargs):
+    # Foreign Key
+    if not 'activity' in kwargs:
+        kwargs['activity'] = create_activity()
+
+    for k, v in create_plan.defaults.items():
+        if not k in kwargs:
+            kwargs[k] = v
+    return Plan.objects.create(**kwargs)
+
+
+create_plan.defaults = {
+    'title': 'Test plan',
+    'due_date': days_from_now(1)
+}
 
 
 class ActivityIndexViewTest(TestCase):
@@ -41,10 +59,10 @@ class ActivityIndexViewTest(TestCase):
         Activity with a end_date in the past is not displayed
         on the index page.
         """
-        activity = create_activity(title="Past activity",
-                                   start_date=days_from_now(-2),
-                                   end_date=days_from_now(-1)
-                                   )
+        create_activity(title="Past activity",
+                        start_date=days_from_now(-2),
+                        end_date=days_from_now(-1)
+                        )
         response = self.client.get(reverse('polls:index'))
         self.assertContains(response, "신청 가능한 활동이 없습니다.")
         self.assertQuerysetEqual(response.context['latest_activity_list'], [])
@@ -114,4 +132,58 @@ class ActivityIndexViewTest(TestCase):
         self.assertQuerysetEqual(
             response.context['latest_activity_list'],
             [activity2, activity1],
+        )
+
+
+class PlanIndexViewTest(TestCase):
+    def test_no_plan(self):
+        """
+        If no plan exists, an appropriate message is displayed.
+        """
+        response = self.client.get(reverse('polls:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "활동 계획이 없습니다.")
+        self.assertQuerysetEqual(response.context['plan_list'], [])
+
+    def test_past_plan(self):
+        """
+        Plan with a due_date in the past is not displayed
+        on the index page.
+        """
+        create_plan(title="Past plan",
+                    due_date=days_from_now(-1)
+                    )
+        response = self.client.get(reverse('polls:index'))
+        self.assertContains(response, "활동 계획이 없습니다.")
+        self.assertQuerysetEqual(response.context['plan_list'], [])
+
+    def test_future_plan(self):
+        """
+        plan with a due_date in the future is displayed
+        on the index page.
+        """
+        plan = create_plan(title="Future plan",
+                           due_date=days_from_now(1)
+                           )
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(
+            response.context['plan_list'],
+            [plan],
+        )
+
+    def test_future_plan_and_past_plan(self):
+        """
+        Even if both past and future plans exist, only future plan
+        is displayed.
+        """
+        plan = create_plan(title="Future plan",
+                           due_date=days_from_now(1)
+                           )
+        create_plan(title="Past plan",
+                    due_date=days_from_now(-2)
+                    )
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(
+            response.context['latest_plan_list'],
+            [plan],
         )
