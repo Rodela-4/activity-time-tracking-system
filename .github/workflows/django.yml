@@ -28,7 +28,10 @@ jobs:
         pip install -r requirements.txt
     - name : Create setting file
       run: |
-        echo '{"Production":false,"SECRET_KEY":"x3^vralhx{6eGh,|UMsrjX=Gi*25k!Vt%4}*Yuyqgou8Z#!pwk","DEBUG":true,"ALLOWED_HOSTS":["127.0.0.1","192.168.0.53"]}' > jamsinhs/settings.json
+        echo '{"Production":false,"SECRET_KEY":"x3^vralhx{6eGh,|UMsrjX=Gi*25k!Vt%4}*Yuyqgou8Z#!pwk", \
+               "DEBUG":true,"ALLOWED_HOSTS":["127.0.0.1","192.168.0.53"]}' > jamsinhs/settings.json
+        cat jamsinhs/settings.json
     - name: Run Tests
       run: |
-        python jamsinhs/manage.py test
+        cd jamsinhs
+        python manage.py test
