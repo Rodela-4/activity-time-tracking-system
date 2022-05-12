@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
   pull_request:
-    branches: [ dev ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -26,6 +26,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name : Create setting file
+      run: |
+        echo '{"Production":false,"SECRET_KEY":"x3^vralhx{6eGh,|UMsrjX=Gi*25k!Vt%4}*Yuyqgou8Z#!pwk","DEBUG":true,"ALLOWED_HOSTS":["127.0.0.1","192.168.0.53"]}' > jamsinhs/settings.json
     - name: Run Tests
       run: |
         python jamsinhs/manage.py test
