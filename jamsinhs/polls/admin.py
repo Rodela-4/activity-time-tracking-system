@@ -28,15 +28,17 @@ class PlanInline(admin.TabularInline):
 
 
 class ApplyAdmin(ExportActionMixin, admin.ModelAdmin):
-    list_filter = ('activity', 'student_id',)
+    list_filter = ('activity', 'state',)
     list_display = ('student_id', 'name', 'activity',
                     'state', 'completed_time',)
+    search_fields = ('student_id', 'name',)
+    actions = (apply_cancel, apply_confirm, apply_complete,)
     inlines = [Additonal_hourInline]
-    actions = [apply_cancel, apply_confirm, apply_complete]
 
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('studentid', 'name', 'password', 'completed_time',)
+    search_fields = ('studentid', 'name',)
 
 
 class ActivityAdmin(admin.ModelAdmin):
