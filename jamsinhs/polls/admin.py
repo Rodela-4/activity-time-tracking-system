@@ -4,19 +4,12 @@ from import_export.admin import ExportActionMixin
 from .models import Apply, Activity, User, Additonal_hour, Plan
 
 
-@admin.action(description="취소")
-def apply_cancel(modeladmin, request, queryset):
-    queryset.update(state=2)
-
-
-@admin.action(description="승인")
-def apply_confirm(modeladmin, request, queryset):
-    queryset.update(state=3)
-
-
-@admin.action(description="이수")
-def apply_complete(modeladmin, request, queryset):
-    queryset.update(state=4)
+def change_apply_state(state, des):
+    @admin.action(description=des)
+    def change_state(modeladmin, request, queryset):
+        queryset.update(state=state)
+    change_state.__name__="change_apply_state_"+str(state)
+    return change_state
 
 
 class Additonal_hourInline(admin.TabularInline):
@@ -32,7 +25,7 @@ class ApplyAdmin(ExportActionMixin, admin.ModelAdmin):
     list_display = ('student_id', 'name', 'activity',
                     'state', 'completed_time',)
     search_fields = ('student_id', 'name',)
-    actions = (apply_cancel, apply_confirm, apply_complete,)
+    actions = [change_apply_state(state,des) for state,des in Apply.APPLY_STATE]
     inlines = [Additonal_hourInline]
 
 
