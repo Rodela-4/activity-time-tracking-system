@@ -74,6 +74,7 @@ class User(models.Model):
     class Meta:
         verbose_name = '학생'
         verbose_name_plural = '학생'
+        db_table = 'test_user'
 
     def __str__(self):
         return self.studentid
