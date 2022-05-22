@@ -50,7 +50,7 @@ activity-time-tracking-system/jamsinhs/settings.json 파일을 생성한다.
   "Production": false,
   "DEBUG": true,
   "SECRET_KEY": "django-insecure-*vseezuz7!()(-thm#-ot@dird!pl*e6a%+@umc0x@n=p3kfo&",
-  "ALLOWED_HOSTS": ["127.0.0.1", "192.168.0.53"]
+  "ALLOWED_HOSTS": ["127.0.0.1"]
 }
 ```
 
