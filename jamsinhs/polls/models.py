@@ -45,8 +45,8 @@ class Apply(models.Model):
     state = models.IntegerField(choices=APPLY_STATE, default=1)
 
     class Meta:
-        verbose_name = '승인'
-        verbose_name_plural = '승인'
+        verbose_name = '신청'
+        verbose_name_plural = '신청'
 
     def __str__(self):
         return f'{self.student_id}-{self.name}-{self.activity}'
