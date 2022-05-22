@@ -35,8 +35,6 @@ pip install -r requirements.txt
 
 ⚠ 가상 환경을 생성하는 과정은 로컬 환경에 따라 달라질 수 있다.   
 
-⚠ 일부 환경에서는 backports.zoneinfo 설치 중 에러가 발생할 수 있다. Django 개발에는 큰 영향을 주지 않는 듯하다.
-
 <br>
 
 ### 3. settings.json 생성하기
