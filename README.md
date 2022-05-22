@@ -11,7 +11,8 @@ A site for tracking math/science activity time
 
 Github에서 저장소를 포크한다. 
 
-포크한 저장소를 클론한다. 
+포크한 저장소를 클론한다.
+
 ```bash
 git clone https://github.com/<Username>/activity-time-tracking-system.git
 
@@ -62,8 +63,26 @@ SECRET_KEY는 Django에서 사용하는 값인데, 개발환경에서는 크게 
 
 ```bash
 cd jamsinhs
+
 python manage.py migrate
+
 python manage.py createsuperuser
+```
+
+<br>
+
+### 5. 개발 서버 실행, 테스트
+
+코드 수정 후 개발 서버를 실행하거나 테스트를 통해 점검한다. 
+
+```bash
+cd jamsinhs
+
+# 개발 서버 실행
+python manage.py runserver
+
+# 테스트
+python manage.py test
 ```
 
 <br>
