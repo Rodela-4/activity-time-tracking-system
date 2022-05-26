@@ -35,6 +35,9 @@ pip install -r requirements.txt
 
 ⚠ 가상 환경을 생성하는 과정은 로컬 환경에 따라 달라질 수 있다.   
 
+⚠ python 3.9 이상에서 backports.zoneinfo 설치 시 오류가 발생할 수 있다. 3.8 버전을 사용하면 문제가 발생하지 않는다.
+
+
 <br>
 
 ### 3. settings.json 생성하기
