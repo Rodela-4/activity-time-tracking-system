@@ -5,6 +5,6 @@ A site for tracking math/science activity time
 
 ***
 
-## 개발환경 설정하기
+## 저장소 이전 안내
 
-[개발 가이드](./CONTRIBUTING.md)를 참고하세요.
+2022년 6월 12일 이후 저장소가 [이곳](https://github.com/RODELA5/activity-time-tracking-system)으로 이전될 예정입니다. 
